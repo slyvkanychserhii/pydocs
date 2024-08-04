@@ -1,13 +1,16 @@
 
 https://docs.djangoproject.com/en/5.0/ref/models/fields/#module-django.db.models.fields.related
-* **ForeignKey** - Отношение «многие к одному». Требует двух позиционных аргументов: класс, к которому относится модель, и опция on_delete.
-    * **on_delete** - Django будет эмулировать поведение ограничения SQL, указанного аргументом on_delete
-        * **CASCADE** - Каскадное удаление.
-        * **PROTECT** - Предотвратите удаление указанного объекта.
-        * **RESTRICT** - 
-        * **SET_NULL** - Установите ForeignKey значение null; это возможно только в том случае, если null равно True.
-        * **SET()** - Установите ForeignKey значение, переданное в SET().
-        * **DO_NOTHING** - Не предпринимайте никаких действий.
+
+# Relationship fields
+
+- **ForeignKey** - Отношение «многие к одному». Требует двух позиционных аргументов: класс, к которому относится модель, и опция on_delete.
+  - **on_delete** - Django будет эмулировать поведение ограничения SQL, указанного аргументом on_delete
+    - **CASCADE** - Каскадное удаление.
+    -  **PROTECT** - Предотвратите удаление указанного объекта.
+    - **RESTRICT** - 
+    -  **SET_NULL** - Установите ForeignKey значение null; это возможно только в том случае, если null равно True.
+    - **SET()** - Установите ForeignKey значение, переданное в SET().
+    - **DO_NOTHING** - Не предпринимайте никаких действий.
 ```python
 from django.db import models
 
@@ -20,8 +23,8 @@ class Car(models.Model):
 class Manufacturer(models.Model):
     pass
 ```
-*
-    * **related_name & related_query_name** - Имя, используемое для отношения от связанного объекта обратно к этому.
+-
+  - **related_name & related_query_name** - Имя, используемое для отношения от связанного объекта обратно к этому.
 ```python
 class Tag(models.Model):
     name = models.CharField(max_length=255)
@@ -48,8 +51,8 @@ tags = article.tags.all()
 # связанные с определенным тегом
 articles = Article.objects.filter(tag__name="example")
 ```
-* **OneToOneField** - Отношение один к одному. Концептуально это похоже на отношение ForeignKey с unique=True, но «обратная» сторона отношения будет напрямую возвращать один объект.
-* **ManyToManyField** - Отношение «многие ко многим».
+- **OneToOneField** - Отношение один к одному. Концептуально это похоже на отношение ForeignKey с unique=True, но «обратная» сторона отношения будет напрямую возвращать один объект.
+- **ManyToManyField** - Отношение «многие ко многим».
 ```python
 class Publication(models.Model):
     title = models.CharField(max_length=30)
